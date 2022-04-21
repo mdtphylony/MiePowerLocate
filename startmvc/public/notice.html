@@ -1,0 +1,81 @@
+
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="./static/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="./static/css/bootstrap.css" type="text/css">
+    <title>告示</title>
+    <style>
+        .container {
+            width: 60%;
+            margin: 5% auto 0;
+            background-color: #f0f0f0;
+            padding: 2% 1%;
+            border-radius: 10px
+        }
+        ul {
+            padding-left: 20px;
+        }
+
+            ul li {
+                line-height: 2.3
+            }
+        a {
+            color: #20a53a
+        }
+    </style>
+</head>
+<body style="padding-bottom: 70px;">
+    
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <span class="fs-4">济中消毒自卫队消毒告示</span>
+    </header>
+    
+    <div class="container">
+        <ul>
+            <li>
+                <div id="txt" class="theme-card__title mr-1">
+                    
+                </div>    
+        
+            </li>
+        </ul>
+    </div>
+    <div class="container">
+
+    <div id="join"  class="text-center" >
+        <div class="item-active">
+            <img src="joinus.jpg" class="mb-4" style="width: 40%; margin: 5% auto 0;"/>
+        </div>
+    </div>     
+    </div>
+    <div  class="fixed-bottom text-center" style="background-color: #f0f0f0;">
+            济中消毒自卫队
+    </div>
+</body>
+</html>
+
+<script>
+
+getParameter = (key) => {
+  
+  // Address of the current window
+  address = window.location.search
+
+  // Returns a URLSearchParams object instance
+  parameterList = new URLSearchParams(address)
+
+  // Returning the respected value associated
+  // with the provided key
+  return parameterList.get(key)
+}
+var date=new Date();
+var time=new Date("2022-4-1 00:00:00");
+var diff=(date-time)/1000;
+var day=parseInt(diff/86400);
+var txt='Hi '+getParameter("dist")+'弄'+getParameter("num")+'号的各位邻居你们好，截止今天是上海疫情以来全市封城第'+day+'天，然而在此大背景下每日新增人数仍处高位。因此我们自发组成了一支44弄与550弄的“消毒自卫队”，我家将负责'+getParameter("num")+'号楼栋每日一次的环境消杀，现有消毒片数量约可支撑'+getParameter("time")+'天左右。考虑到大家的作息以及我自身的时间安排，每日消杀工作将安排在每天'+getParameter("act")+'之后（消杀工作开展前也会群里通知各位）。如各位有朋友也有意愿负责自己楼道消杀工作，欢迎加入我们的“消毒自卫队”';
+window.document.getElementById("txt").innerText=txt;
+
+</script>
