@@ -10,7 +10,6 @@
     <link href="/static/css/jquery-ui.css" rel="stylesheet">
 
     <script src="https://api.map.baidu.com/api?type=webgl&v=1.0&ak=ap6f2VqoYj5zo1OPbhEuKUC2I5LYgsVR"></script>
-
     <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
     <title>信息上报系统</title>
 
@@ -221,9 +220,13 @@
         // 函数 创建多个标注
     function markerFun (points,label,infoWindows,ishealth) {
 
-        var myIcon = new BMapGL.Icon("/static/images/red.png", new BMapGL.Size(35, 50));
-        if(ishealth){
+        var myIcon;
+        if(ishealth==1){
             myIcon=new BMapGL.Icon("/static/images/green.png", new BMapGL.Size(35, 50));
+        }else if(ishealth==-1){
+            myIcon = new BMapGL.Icon("/static/images/red.png", new BMapGL.Size(35, 50));
+        }else if(ishealth==-2){
+            myIcon = new BMapGL.Icon("/static/images/yellow.png", new BMapGL.Size(35, 50));
         }
         // 创建Marker标注，使用小车图标
         var marker = new BMapGL.Marker(points, {
@@ -285,7 +288,8 @@
             });
 
             //var infoWindows = new BMapGL.InfoWindow(mapPoints[i].con+'</br><a href="javascript:showMore('+mapPoints[i].branch+')">录入新数据</a>', infoopts);
-            var ishealth=mapPoints[i].con=="健康"?true:false;
+            var ishealth=mapPoints[i].con=="健康"?1:-1;
+            ishealth=mapPoints[i].con.search("异常")!=-1?-2:ishealth;
             markerFun(points, label, infoWindows,ishealth);
         }
     }
